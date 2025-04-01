@@ -1,0 +1,94 @@
+dataset:
+  data_scaling: True
+  batch_sizes:
+    stage1: 32
+    stage2: 32
+    stage_neural_mapper: 32
+  num_workers: 0
+
+exp_params:
+  lr: 0.005
+  linear_warmup_rate: 0.05
+  min_lr: 0.0005
+
+trainer_params:
+  max_steps:
+    stage1: 20000 #50000
+    stage2: 40000
+    stage_neural_mapper: 3000 #30000
+  val_check_interval:
+    stage1: 1000
+    stage2: 1000
+    stage_neural_mapper: 1000
+
+encoder:
+  init_dim: 4  # initial dimension
+  hid_dim: 128  # hidden dimension in the bottleneck
+  n_resnet_blocks: 2
+  downsampled_width:
+    lf: 8
+    hf: 32
+
+decoder:
+  n_resnet_blocks: 2
+
+VQ-VAE:
+  n_fft: 4
+  codebook_sizes:
+    lf: 1024
+    hf: 1024
+  kmeans_init: True
+  codebook_dim: 8
+
+
+MaskGIT:
+  choice_temperatures: # higher temp -> higher sample diversity
+    lf: 10
+    hf: 0
+  T:  # num sampling (iterative decoding) steps
+    lf: 10
+    hf: 10
+  prior_model_l:
+    hidden_dim: 128
+    n_layers: 4
+    heads: 2
+    ff_mult: 1
+    use_rmsnorm: True
+    p_unconditional: 0.2
+    model_dropout: 0.3
+    emb_dropout: 0.3
+  prior_model_h:
+    hidden_dim: 32
+    n_layers: 1
+    heads: 1
+    ff_mult: 1
+    use_rmsnorm: True
+    p_unconditional: 0.2
+    model_dropout: 0.3
+    emb_dropout: 0.3
+  cfg_scale: 1.  # classifier-free guidance scale
+  ESS:  # under maintenance
+    use: False
+    error_ratio_ma_rate: 0.3
+
+
+
+neural_mapper:
+  dim: 8
+  dim_mults:
+    - 1
+    - 2
+    - 4
+    - 8
+  resnet_block_groups: 4
+  dropout: 0.5
+  tau_search_rng: 
+    - 0.1
+    - 0.5
+    - 1
+    - 2
+    - 4
+
+evaluation:
+  batch_size: 32
+  min_num_gen_samples: 1024

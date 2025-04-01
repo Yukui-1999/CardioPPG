@@ -1,0 +1,12 @@
+dataset:
+  in_channels: 1
+  data_scaling: True
+  batch_size: 256
+  num_workers: 0
+
+exp_params:
+  lr: 0.001  # learning rate
+
+trainer_params:
+  max_steps: 5000
+  val_check_interval: 500
