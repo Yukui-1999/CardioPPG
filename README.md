@@ -1,6 +1,6 @@
 # CardioPPG
 
-Leveraging Cross-Modal AI: Evaluating Photoplethysmography as a Clinically Viable Alternative to Electrocardiography for Cardiovascular Disease Screening — A Pilot Study.
+AI Modelling Photoplethysmography to Electrocardiography Useful for Predicting Cardiovascular Disease - A Pilot Study.
 
 ![CardioPPG](CardioPPG.png)
 
